@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_application_1/pages/talk_room.dart';
 import '../model/user.dart';
 
 class TopPage extends StatefulWidget {
@@ -24,45 +24,58 @@ class _TopPageState extends State<TopPage> {
         imagePath: 'https://illust-stock.com/wp-content/uploads/inu.png',
         lastMessage: 'ありがとう'),
   ];
-
+////////////ページの中身//////////////////
   @override
   Widget build(BuildContext context) {
-    //ここがページの中身
     return Scaffold(
+//////////アップバー//////////////////
       appBar: AppBar(
         title: const Text('チャットアプリ'),
       ),
+////////////////////////////////////
       body: ListView.builder(
           itemCount: userList.length, //インスタンスのユーザーの数で変わる
           itemBuilder: (context, index) {
-            return SizedBox(
-              height: 70,
-              child: Row(
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8.0), //左右にパディング
-                    child: CircleAvatar(
-                      radius: 30, //大きさを変えるプロパティ
-                      backgroundImage: userList[index].imagePath == null
-                          ? null
-                          : NetworkImage(userList[index].imagePath!),
-                    ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start, //左つめにするプロパティ
-                    mainAxisAlignment: MainAxisAlignment.center, //真ん中寄せプロパティ
-                    children: [
-                      Text(
-                        userList[index].name,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+            //////// 画面遷移ボタン /////////////////
+            return InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            TalkRoomPage(userList[index].name)));
+              },
+//////////////////////////////////////////////
+              child: SizedBox(
+                height: 70,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0), //左右にパディング
+                      child: CircleAvatar(
+                        radius: 30, //大きさを変えるプロパティ
+                        backgroundImage: userList[index].imagePath == null
+                            ? null
+                            : NetworkImage(userList[index].imagePath!),
                       ),
-                      Text(userList[index].lastMessage,
-                          style: TextStyle(color: Colors.grey)),
-                    ],
-                  )
-                ],
+                    ),
+                    Column(
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start, //左つめにするプロパティ
+                      mainAxisAlignment: MainAxisAlignment.center, //真ん中寄せプロパティ
+                      children: [
+                        Text(
+                          userList[index].name,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Text(userList[index].lastMessage,
+                            style: const TextStyle(color: Colors.grey)),
+                      ],
+                    )
+                  ],
+                ),
               ),
             );
           }),
