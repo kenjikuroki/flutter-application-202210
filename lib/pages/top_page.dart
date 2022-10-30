@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/setting_profile_page.dart';
 import 'package:flutter_application_1/pages/talk_room.dart';
 import '../model/user.dart';
 
@@ -31,6 +32,16 @@ class _TopPageState extends State<TopPage> {
 //////////アップバー//////////////////
       appBar: AppBar(
         title: const Text('チャットアプリ'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SettingProfilePage()));
+              },
+              icon: const Icon(Icons.settings))
+        ],
       ),
 ////////////////////////////////////
       body: ListView.builder(
