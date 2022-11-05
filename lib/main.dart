@@ -10,7 +10,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await UserFirestore.createUser();
+  await UserFirestore.fechUsers();
   runApp(const MyApp());
 }
 
